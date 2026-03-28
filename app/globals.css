@@ -5,6 +5,17 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --color-primary: #1A6B5A;
+  --color-primary-light: #2D9E87;
+  --color-accent: #F4845F;
+  --color-accent-soft: #FDE8DF;
+  --color-surface: #F8FAF9;
+  --color-surface-card: #FFFFFF;
+  --color-text-primary: #1C2B27;
+  --color-text-muted: #6B8A82;
+  --color-border: #D6E8E3;
+  --color-success: #27AE60;
+  --color-warning: #F2C94C;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,7 +28,6 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {

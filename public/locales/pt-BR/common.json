@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "home": "Início",
+    "requests": "Pedidos",
+    "campaigns": "Campanhas",
+    "profile": "Perfil",
+    "login": "Entrar",
+    "register": "Começar agora",
+    "logout": "Sair"
+  },
+  "hero": {
+    "headline": "Cuidar é um ato de amor.",
+    "subtitle": "Conectamos quem cuida com quem precisa.",
+    "cta_primary": "Quero me cadastrar",
+    "cta_secondary": "Saiba mais"
+  },
+  "stats": {
+    "doctors": "médicos voluntários",
+    "families": "famílias ajudadas",
+    "raised": "arrecadados"
+  },
+  "features": {
+    "connect_title": "Conectar",
+    "connect_desc": "Médicos voluntários e pacientes se encontram de forma simples, segura e humana.",
+    "raise_title": "Arrecadar",
+    "raise_desc": "Crie campanhas de saúde e conte sua história.",
+    "donate_title": "Doar",
+    "donate_desc": "Apoie campanhas reais de pessoas que precisam de ajuda."
+  },
+  "auth": {
+    "login_title": "Bem-vindo de volta",
+    "login_subtitle": "Entre na sua conta para continuar cuidando",
+    "register_title": "Como você quer participar?",
+    "email": "E-mail",
+    "password": "Senha",
+    "name": "Nome completo",
+    "enter": "Entrar",
+    "create_account": "Criar conta",
+    "no_account": "Não tem conta?",
+    "has_account": "Já tem conta?",
+    "signup_free": "Cadastre-se gratuitamente",
+    "role_patient": "Preciso de ajuda",
+    "role_doctor": "Quero ajudar",
+    "role_donor": "Quero doar"
+  },
+  "dashboard": {
+    "greeting": "Olá, {name} 👋",
+    "subtitle": "Como podemos ajudar hoje?",
+    "my_requests": "Meus pedidos ativos",
+    "my_campaigns": "Minhas campanhas",
+    "new_request": "Novo Pedido",
+    "new_campaign": "Criar Campanha"
+  },
+  "requests": {
+    "title": "Pedidos de assistência",
+    "subtitle": "Pessoas que precisam de apoio médico voluntário",
+    "empty": "Nenhum pedido encontrado",
+    "new_title": "Novo pedido de assistência",
+    "publish": "Publicar pedido",
+    "help_cta": "Quero ajudar com este caso"
+  },
+  "campaigns": {
+    "title": "Ajude quem mais precisa",
+    "empty": "Nenhuma campanha encontrada",
+    "new_title": "Criar campanha de saúde",
+    "publish": "Publicar campanha",
+    "donate_cta": "Fazer minha doação 💚",
+    "donors": "doadores",
+    "raised_of": "de"
+  },
+  "common": {
+    "loading": "Cuida está buscando...",
+    "error": "Algo deu errado. Tente novamente.",
+    "back": "Voltar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "urgent": "Urgente"
+  }
+}
