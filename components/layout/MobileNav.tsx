@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, FileText, Heart, User, type LucideProps } from "lucide-react";
+import { Home, FileText, Heart, LogOut, type LucideProps } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
+import { useAuth } from "@/lib/hooks/useAuth";
 
 interface MobileNavItem {
   href: string;
@@ -15,11 +16,11 @@ const navItems: MobileNavItem[] = [
   { href: "/dashboard", label: "Início", icon: Home },
   { href: "/requests", label: "Pedidos", icon: FileText },
   { href: "/campaigns", label: "Campanhas", icon: Heart },
-  { href: "/profile", label: "Perfil", icon: User },
 ];
 
 export default function MobileNav() {
   const pathname = usePathname();
+  const { signOut } = useAuth();
 
   const isActive = (href: string) => {
     if (href === "/dashboard") return pathname === "/dashboard" || pathname.startsWith("/dashboard/");
@@ -43,29 +44,27 @@ export default function MobileNav() {
               aria-current={active ? "page" : undefined}
               className="flex flex-col items-center gap-1 px-4 py-1.5 rounded-xl transition-all duration-200 min-w-0"
             >
-              <span
-                className={`
-                  flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-200
-                  ${active ? "bg-[#E6F4F1]" : ""}
-                `}
-              >
-                <Icon
-                  size={20}
-                  className={`transition-colors duration-200 ${
-                    active ? "text-primary" : "text-text-muted"
-                  }`}
-                />
+              <span className={`flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-200 ${active ? "bg-[#E6F4F1]" : ""}`}>
+                <Icon size={20} className={`transition-colors duration-200 ${active ? "text-primary" : "text-text-muted"}`} />
               </span>
-              <span
-                className={`text-[10px] font-medium leading-none transition-colors duration-200 ${
-                  active ? "text-primary" : "text-text-muted"
-                }`}
-              >
+              <span className={`text-[10px] font-medium leading-none transition-colors duration-200 ${active ? "text-primary" : "text-text-muted"}`}>
                 {label}
               </span>
             </Link>
           );
         })}
+
+        {/* Sign out */}
+        <button
+          onClick={signOut}
+          aria-label="Sair da conta"
+          className="flex flex-col items-center gap-1 px-4 py-1.5 rounded-xl transition-all duration-200 min-w-0"
+        >
+          <span className="flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-200 hover:bg-[#FDE8DF]">
+            <LogOut size={20} className="text-text-muted hover:text-[#C0392B] transition-colors duration-200" />
+          </span>
+          <span className="text-[10px] font-medium leading-none text-text-muted">Sair</span>
+        </button>
       </div>
     </nav>
   );

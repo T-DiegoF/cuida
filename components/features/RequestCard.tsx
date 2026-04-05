@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Link from "next/link";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { MedicalRequestWithPatient } from "@/types/database";
@@ -16,7 +17,7 @@ interface RequestCardProps {
   compact?: boolean;
 }
 
-export default function RequestCard({ request, compact = false }: RequestCardProps) {
+export default memo(function RequestCard({ request, compact = false }: RequestCardProps) {
   const patient = request.profiles;
   const initials = patient?.full_name
     ? patient.full_name.split(" ").map((n) => n[0]).slice(0, 2).join("").toUpperCase()
@@ -96,4 +97,4 @@ export default function RequestCard({ request, compact = false }: RequestCardPro
       </div>
     </Link>
   );
-}
+});

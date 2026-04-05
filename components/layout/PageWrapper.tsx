@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import MobileNav from "./MobileNav";
@@ -25,19 +24,9 @@ export default function PageWrapper({
   avatarUrl,
   onSignOut,
 }: PageWrapperProps) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   if (!showNav) {
     return (
-      <main
-        className={`min-h-screen bg-surface transition-all duration-300 ${
-          mounted ? "animate-fade-up" : "opacity-0"
-        }`}
-      >
+      <main className="min-h-screen bg-surface animate-fade-up">
         {children}
       </main>
     );
@@ -62,14 +51,13 @@ export default function PageWrapper({
 
       {/* Page content */}
       <main
-        className={`
+        className="
           lg:pl-[260px]
           pt-[60px] lg:pt-0
           pb-[72px] lg:pb-0
           min-h-screen
-          transition-all duration-300
-          ${mounted ? "animate-fade-up" : "opacity-0"}
-        `}
+          animate-fade-up
+        "
         id="main-content"
       >
         {/* Skip to content (accessibility) */}

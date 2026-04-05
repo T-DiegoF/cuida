@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Link from "next/link";
 import { Users, ArrowRight } from "lucide-react";
 import { CampaignWithPatient } from "@/types/database";
@@ -12,7 +13,7 @@ interface CampaignCardProps {
   featured?: boolean;
 }
 
-export default function CampaignCard({ campaign, featured = false }: CampaignCardProps) {
+export default memo(function CampaignCard({ campaign, featured = false }: CampaignCardProps) {
   const percent = campaign.goal_amount > 0
     ? Math.min(100, Math.round((campaign.current_amount / campaign.goal_amount) * 100))
     : 0;
@@ -90,4 +91,4 @@ export default function CampaignCard({ campaign, featured = false }: CampaignCar
       </div>
     </Link>
   );
-}
+});

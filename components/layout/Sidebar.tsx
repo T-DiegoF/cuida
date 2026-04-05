@@ -22,7 +22,7 @@ const navItems: NavItem[] = [
   { href: "/dashboard", label: "Início", icon: <Home size={18} /> },
   { href: "/requests", label: "Pedidos", icon: <FileText size={18} /> },
   { href: "/campaigns", label: "Campanhas", icon: <Heart size={18} /> },
-  { href: "/profile", label: "Perfil", icon: <User size={18} /> },
+  { href: "/dashboard", label: "Perfil", icon: <User size={18} /> },
 ];
 
 const roleLabelMap: Record<string, { label: string; color: string }> = {
@@ -59,10 +59,9 @@ export default function Sidebar({
 
   const handleSignOut = async () => {
     if (onSignOut) {
-      onSignOut();
-    } else {
-      router.push("/auth/login");
+      await onSignOut();
     }
+    router.push("/auth/login");
   };
 
   return (
@@ -71,11 +70,19 @@ export default function Sidebar({
       style={{ width: 260 }}
       aria-label="Navegação principal"
     >
-      {/* Logo */}
-      <div className="px-6 py-6 border-b border-[#D6E8E3]">
+      {/* Logo + user avatar */}
+      <div className="px-4 py-4 border-b border-[#D6E8E3] flex items-center justify-between">
         <Link href="/dashboard" aria-label="Ir para o início">
           <Logo size="md" />
         </Link>
+        <div className="w-9 h-9 rounded-full bg-[#D6E8E3] flex items-center justify-center overflow-hidden flex-shrink-0">
+          {avatarUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={avatarUrl} alt={userName} className="w-full h-full object-cover" />
+          ) : (
+            <Stethoscope size={16} className="text-primary-light" />
+          )}
+        </div>
       </div>
 
       {/* Nav items */}
@@ -120,16 +127,6 @@ export default function Sidebar({
       <div className="px-3 py-4 border-t border-[#D6E8E3] space-y-3">
         {/* User card */}
         <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-surface">
-          {/* Avatar */}
-          <div className="w-9 h-9 rounded-full bg-[#D6E8E3] flex items-center justify-center overflow-hidden flex-shrink-0">
-            {avatarUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={avatarUrl} alt={userName} className="w-full h-full object-cover" />
-            ) : (
-              <Stethoscope size={16} className="text-primary-light" />
-            )}
-          </div>
-
           {/* Name + role */}
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-text-main truncate leading-tight">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, DM_Sans } from "next/font/google";
+import { AuthProvider } from "@/lib/context/AuthContext";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -29,7 +30,7 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${fraunces.variable} font-sans antialiased`}
       >
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

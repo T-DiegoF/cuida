@@ -20,7 +20,7 @@ export function useCampaigns() {
         .from("campaigns")
         .select(
           `
-          *,
+          id, title, story, status, goal_amount, current_amount, cover_image_url, created_at, patient_id,
           profiles:patient_id (
             id,
             full_name,
@@ -29,7 +29,8 @@ export function useCampaigns() {
           donations (count)
         `
         )
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: false })
+        .limit(20);
 
       if (filters?.status) {
         query = query.eq("status", filters.status);
@@ -41,7 +42,7 @@ export function useCampaigns() {
         console.error("Erro ao buscar campanhas:", error.message);
         return [];
       }
-      return (data ?? []) as CampaignWithPatient[];
+      return (data ?? []) as unknown as CampaignWithPatient[];
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
@@ -53,11 +54,13 @@ export function useCampaigns() {
         .from("campaigns")
         .select(
           `
-          *,
+          id, title, story, status, goal_amount, current_amount, cover_image_url, created_at, patient_id,
           profiles:patient_id (
             id,
             full_name,
-            avatar_url
+            avatar_url,
+            location,
+            bio
           ),
           donations (count)
         `
@@ -69,7 +72,7 @@ export function useCampaigns() {
         console.error("Erro ao buscar campanha:", error.message);
         return null;
       }
-      return data as CampaignWithPatient;
+      return data as unknown as CampaignWithPatient;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
@@ -136,20 +139,11 @@ export function useCampaigns() {
         return null;
       }
 
-      // Update campaign current_amount via RPC or direct update
-      // Fetch current amount first to increment safely
-      const { data: campaign, error: campaignError } = await supabaseClient
-        .from("campaigns")
-        .select("current_amount")
-        .eq("id", campaignId)
-        .single();
-
-      if (!campaignError && campaign) {
-        await supabaseClient
-          .from("campaigns")
-          .update({ current_amount: (campaign.current_amount ?? 0) + amount })
-          .eq("id", campaignId);
-      }
+      // Atomic increment — single query, no race condition
+      await supabaseClient.rpc("increment_campaign_amount", {
+        p_campaign_id: campaignId,
+        p_amount: amount,
+      });
 
       return donation as Donation;
     },

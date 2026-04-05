@@ -21,7 +21,7 @@ export function useRequests() {
         .from("medical_requests")
         .select(
           `
-          *,
+          id, title, status, urgency, specialty_needed, location, created_at, patient_id,
           profiles:patient_id (
             id,
             full_name,
@@ -30,7 +30,8 @@ export function useRequests() {
           )
         `
         )
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: false })
+        .limit(20);
 
       if (filters?.specialty) {
         query = query.ilike("specialty_needed", `%${filters.specialty}%`);
@@ -51,7 +52,7 @@ export function useRequests() {
         console.error("Erro ao buscar pedidos:", error.message);
         return [];
       }
-      return (data ?? []) as MedicalRequestWithPatient[];
+      return (data ?? []) as unknown as MedicalRequestWithPatient[];
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
